@@ -25,6 +25,9 @@ UI.prototype.addBookToList = function(book){
     list.appendChild(row);
 }
 
+// Variable for setTimeout function
+var deleteTime;
+
 // Show Alert
 UI.prototype.showAlert = function(message, className) {
     // Create div
@@ -38,11 +41,17 @@ UI.prototype.showAlert = function(message, className) {
     // Get form
     const form = document.querySelector('#book-form');
 
+    if(container.contains(document.querySelector('.alert'))) {
+        document.querySelector(`.alert`).remove();
+        clearTimeout(deleteTime);
+    }
+    
     // Insert alert
     container.insertBefore(div, form)
 
+    
     // Timeout after 3 sec
-    setTimeout(function(){
+    deleteTime = setTimeout(function(){
         document.querySelector('.alert').remove();
     }, 3000);
 }
